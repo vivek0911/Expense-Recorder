@@ -46,11 +46,11 @@ exports.getAllTrips = (request, response) => {
 exports.deleteTripById = (request, response) => {
   // first delete all expenses for given trip id then delete trip
   ExpenseService.deleteAllExpensesByTripId(request.params.tripId)
-    .then((deletedExpenses) => {
+    .then((deletedCount) => {
       TripService.deleteTripById(request.params.tripId)
        .then((deletedTrip) => {
          if (deletedTrip) {
-           response.status(200).send({ deletedTrip, deletedExpenses });
+           response.status(200).send({ deletedTrip, deletedCount });
          }
        })
       .catch((error) => {

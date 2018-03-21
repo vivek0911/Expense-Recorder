@@ -1,20 +1,30 @@
 const ExpenseService = require('../services/expense.service');
+const TripService = require('../services/trip.service');
 const _ = require('lodash');
 
 exports.createExpense = (request, response) => {
   const expense = _.assign({}, request.body);
-  ExpenseService.createExpense(expense)
-    .then((createdExpense) => {
-      response.status(200).send(createdExpense);
-    })
-    .catch((error) => {
-      response.status(422).send(error);
-    });
+  TripService.getTripById(expense.tripId)
+  .then((trip) => {
+    if (trip) {
+      ExpenseService.createExpense(expense)
+        .then((createdExpense) => {
+          response.status(200).send(createdExpense);
+        })
+        .catch((error) => {
+          response.status(422).send(error);
+        });
+    }
+  })
+  .catch((error) => {
+    response.status(422).send(`could not get trip by id : error=${error}`);
+  });
 };
 
 exports.updateExpenseByTripIdAndExpenseId = (request, response) => {
-  const e = { ...{ tripId: request.params.tripId, expenseId: request.params.expenseId, expense: request.body } };
-  ExpenseService.updateExpenseByTripIdAndExpenseId(e.tripId, e.expenseId, e.expense)
+  const { tripId, expenseId } = request.params;
+  const expense = request.body;
+  ExpenseService.updateExpenseByTripIdAndExpenseId(tripId, expenseId, expense)
       .then((updatedExpense) => {
         response.status(200).send(updatedExpense);
       })
@@ -71,7 +81,7 @@ exports.deleteAllExpensesByTripId = (request, response) => {
   ExpenseService.deleteAllExpensesByTripId(request.params.tripId)
     .then((deletedExpenses) => {
       if (deletedExpenses) {
-        response.status(200).send(deletedExpenses);
+        response.status(200).send({ deletedExpenses, deletedCount: deletedExpenses.result.n });
       }
     })
     .catch((error) => {

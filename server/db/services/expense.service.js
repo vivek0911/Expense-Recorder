@@ -10,8 +10,8 @@ exports.createExpense = expense => new Promise((resolve, reject) => {
   });
 });
 
-exports.updateTrip = (tripId, expenseId, expense) => new Promise((resolve, reject) => {
-  Expense.updateExpenseByTripIdAndExpenseId({ $and: [{ _id: expenseId }, { tripId }] }, expense, { new: true })
+exports.updateExpenseByTripIdAndExpenseId = (tripId, expenseId, expense) => new Promise((resolve, reject) => {
+  Expense.findOneAndUpdate({ $and: [{ _id: expenseId }, { tripId }] }, expense, { new: true })
     .then((updatedExpense) => {
       resolve(updatedExpense && updatedExpense.toObject());
     })
@@ -51,20 +51,20 @@ exports.deleteExpenseByTripIdAndExpenseId = (tripId, expenseId) => new Promise((
 
 
 exports.getAllExpensesByTripId = tripId => new Promise((resolve, reject) => {
-  Expense.find({ tripId }, (error, expenses) => {
+  Expense.find({ tripId }, (error, allExpenses) => {
     if (error) {
       reject(error);
     }
-    resolve(expenses && expenses.toObject());
+    const expenses = (allExpenses || []).map(e => e && e.toObject());
+    resolve(expenses);
   });
 });
 
 exports.deleteAllExpensesByTripId = tripId => new Promise((resolve, reject) => {
-  Expense.deleteMany({ tripId }, (error, deletedExpenses) => {
+  Expense.deleteMany({ tripId }, (error, deletedCount) => {
     if (error) {
       reject(error);
     }
-    const expenses = (deletedExpenses || []).map(e => e && e.toObject());
-    resolve(expenses);
+    resolve(deletedCount);
   });
 });

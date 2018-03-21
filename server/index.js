@@ -36,3 +36,5 @@ app.use('/*', (req, res) => {
 http.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+// https://www.getpostman.com/collections/e916889b970ef0fb5ac1
