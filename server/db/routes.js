@@ -1,6 +1,24 @@
 const express = require('express');
 const router = express.Router();
 
-// add your backend routes here
+const tripController = require('./controllers/trip.controller');
+const expenseController = require('./controllers/expense.controller');
+
+// trip
+router.post('/trip/new', tripController.createTrip);
+router.put('/trip/:tripId', tripController.updateTrip);
+router.get('/trip/:tripId', tripController.getTripById);
+router.get('/trips', tripController.getAllTrips);
+router.delete('/trip/:tripId', tripController.deleteTripById); // should delete all expenses along with trip
+
+// expense
+router.post('/expense/new', expenseController.createExpense);
+router.put('/trip/:tripId/expense/:expenseId', expenseController.updateExpenseByTripIdAndExpenseId);
+router.get('/trip/:tripId/expense/:expenseId', expenseController.getExpenseByTripIdAndExpenseId);
+router.get('/expenses/all', expenseController.getAllExpenses);
+router.delete('/trip/:tripId/expense/:expenseId', expenseController.deleteExpenseByTripIdAndExpenseId);
+
+router.get('/tripexpenses/:tripId', expenseController.getAllExpensesByTripId);
+router.delete('/tripexpenses/:tripId', expenseController.deleteAllExpensesByTripId);
 
 module.exports = router;
