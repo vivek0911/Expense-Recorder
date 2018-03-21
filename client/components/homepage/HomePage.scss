@@ -1,0 +1,27 @@
+.homepage {
+    background: #3b4465;
+    height: 100vh;
+    .middle {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        h1 {
+            color: #fff;
+            font-size: 3em;
+            margin: 0 0 0.4em 0;
+        }
+        button {
+            font-size: 2em;
+            color: #fff;
+            background: none;
+            border: none;
+            cursor: pointer;
+            a {
+              all: unset;
+            }
+            &:hover, &:active {
+                text-decoration: underline;
+            }
+        }
+    }
+}

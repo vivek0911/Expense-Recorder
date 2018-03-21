@@ -1,0 +1,9 @@
+@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+@import '../node_modules/font-awesome/css/font-awesome.min.css';
+@import '../node_modules/react-select/dist/react-select.min.css';
+
+.row-col-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
