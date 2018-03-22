@@ -8,7 +8,7 @@ const tripController = require('./controllers/trip.controller');
 const expenseController = require('./controllers/expense.controller');
 
 // upload image
-router.post('/image/upload', upload.any(), expenseController.uploadImages);
+router.post('/image/upload/:tripId/:expenseId', upload.any(), expenseController.uploadImages);
 
 // trip
 router.post('/trip/new', tripController.createTrip);

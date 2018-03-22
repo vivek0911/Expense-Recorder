@@ -1,0 +1,15 @@
+.button {
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 85%;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  a {
+    all: unset;
+  }
+}
+.btn-pink {
+  background: #DE6060;
+  color: #fff;
+}

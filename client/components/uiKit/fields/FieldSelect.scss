@@ -1,0 +1,17 @@
+.field-select-wrapper {
+  .field-select {
+    width: 100%;
+    .Select-control {
+      border: none;
+      .Select-value, .Select-placeholder {
+        display: flex;
+        align-items: center;
+        font-size: 85%;
+        // color: darkblue;
+      }
+      .Select-placeholder {
+        padding-left: 2em; //not necessary for all select-input
+      } 
+    }
+  }
+}

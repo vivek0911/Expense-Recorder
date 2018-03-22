@@ -100,10 +100,15 @@ exports.uploadImages = (request, response) => {
   });
   Promise.all(promiseArr)
     .then((results) => {
-      console.log('results in controller', results);
       const urlArr = results.map(result => result.Location);
-      console.log('..........s3 url', urlArr);
-      // write service to save url to mongodb
+      const { tripId, expenseId } = request.params;
+      ExpenseService.updateExpenseByTripIdAndExpenseId(tripId, expenseId, { images: urlArr })
+      .then((updatedExpense) => {
+        response.status(200).send(updatedExpense);
+      })
+      .catch((error) => {
+        response.status(422).send(error);
+      });
     })
     .catch((error) => {
       response.status(422).send(error);

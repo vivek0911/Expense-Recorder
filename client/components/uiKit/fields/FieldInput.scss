@@ -1,0 +1,21 @@
+.input-wrapper {
+  width: 100%;
+  .field-text-input {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    box-shadow: 0px 0px 1px 0px rgba(0,0,0,0.35);
+    border: none;
+    outline: none;
+    font-size: 85%;
+    @media (max-width: 767px) { padding: 7px }
+    &::placeholder {
+      color: #b3b3b3;
+    }
+  }
+  .onFocus-border {
+    &:focus, &:active {
+      border: 1px solid #DE6060;
+    }
+  }
+}

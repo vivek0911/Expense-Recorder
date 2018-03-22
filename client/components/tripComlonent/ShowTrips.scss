@@ -1,0 +1,17 @@
+.show-trips-wrap {
+  .trip {
+    display: flex;
+    width: 60%;
+    span {
+      font-size: 1.35vw;
+      flex: 1;
+      cursor: pointer;
+    }
+    span:first-child {
+      flex: 2;
+      text-transform: capitalize;
+      color: #de6060;
+      font-weight: 300;
+    }
+  }
+}

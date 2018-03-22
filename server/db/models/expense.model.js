@@ -9,7 +9,7 @@ const expenseSchema = new Schema({
   amount: { type: Number, required: true },
   baseCurrency: String,
   discription: String,
-  image: String, //or [String]
+  images: [String],
 },
   {
     timestamps: true,
