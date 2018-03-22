@@ -1,6 +1,8 @@
 const ExpenseService = require('../services/expense.service');
 const TripService = require('../services/trip.service');
+const s3Service = require('../services/s3.service');
 const _ = require('lodash');
+const path = require('path');
 
 exports.createExpense = (request, response) => {
   const expense = _.assign({}, request.body);
@@ -83,6 +85,25 @@ exports.deleteAllExpensesByTripId = (request, response) => {
       if (deletedExpenses) {
         response.status(200).send({ deletedExpenses, deletedCount: deletedExpenses.result.n });
       }
+    })
+    .catch((error) => {
+      response.status(422).send(error);
+    });
+};
+
+exports.uploadImages = (request, response) => {
+  const files = request.files;
+  const promiseArr = files.map((file) => {
+    const absPath = path.resolve(process.cwd(), file.path);
+    const fileName = file.originalname;
+    return s3Service.uploadFile(process.env.S3_BUCKET_NAME, fileName, absPath);
+  });
+  Promise.all(promiseArr)
+    .then((results) => {
+      console.log('results in controller', results);
+      const urlArr = results.map(result => result.Location);
+      console.log('..........s3 url', urlArr);
+      // write service to save url to mongodb
     })
     .catch((error) => {
       response.status(422).send(error);

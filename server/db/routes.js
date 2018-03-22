@@ -1,8 +1,14 @@
 const express = require('express');
+const multer = require('multer');
+
+const upload = multer({ dest: 'images/', limits: { fileSize: 10000000 } }); // 10 MB max
 const router = express.Router();
 
 const tripController = require('./controllers/trip.controller');
 const expenseController = require('./controllers/expense.controller');
+
+// upload image
+router.post('/image/upload', upload.any(), expenseController.uploadImages);
 
 // trip
 router.post('/trip/new', tripController.createTrip);
