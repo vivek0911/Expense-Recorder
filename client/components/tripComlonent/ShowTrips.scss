@@ -1,17 +1,26 @@
 .show-trips-wrap {
-  .trip {
-    display: flex;
+  .triplist {
     width: 60%;
-    span {
-      font-size: 1.35vw;
-      flex: 1;
-      cursor: pointer;
+    .trip {
+      display: flex;
+      span {
+        font-size: 1.35vw;
+        flex: 1;
+        cursor: pointer;
+      }
+      span:first-child {
+        flex: 2;
+        text-transform: capitalize;
+        color: #de6060;
+        font-weight: 300;
+      }
     }
-    span:first-child {
-      flex: 2;
-      text-transform: capitalize;
-      color: #de6060;
-      font-weight: 300;
+    .trip-detail {
+      border: 1px solid #de6060;
+      .dates-wrap {
+        display: flex;
+        justify-content: space-between;
+      }
     }
   }
 }

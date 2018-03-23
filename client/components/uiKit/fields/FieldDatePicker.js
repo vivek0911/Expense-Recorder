@@ -1,18 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import DatePicker from 'react-datepicker';
+import Moment from 'moment';
 import './FieldDatePicker.scss';
 
 const FieldDatePicker = ({ onChange, value, style, placeholder }) => {
-  console.log('field DatePicker');
   return (
     <div className="field-date-picker" {...{ style }}>
       <DatePicker
-        selected={value}
+        selected={Moment(value).isValid() ? Moment(value) : undefined}
         dateFormat="DD/MM/YYYY"
-        className="field-dp"
         placeholderText={placeholder}
-        onChange={v => onChange(v.toDate())}
+        onChange={v => onChange(v)}
       />
     </div>
   );
@@ -27,7 +26,7 @@ FieldDatePicker.defaultProps = {
 
 FieldDatePicker.propTypes = {
   placeholder: PropTypes.string,
-  value: PropTypes.any,
+  value: PropTypes.string,
   onChange: PropTypes.func,
   style: PropTypes.object,
 };
