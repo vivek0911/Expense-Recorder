@@ -14,7 +14,9 @@ export default (state = initialState.trip, action) => {
     case 'DELETED_TRIP':
       const dTrip = action.payload.deletedTrip; // check payload
       const newTripArr = (state.allTrips || []).filter(t => t._id !== dTrip._id);
-      return _.assign({}, state, { allTrips: newTripArr });
+      return _.assign({}, state, { allTrips: newTripArr, selectedTrip: state.selectedTrip._id === dTrip._id ? {} : state.selectedTrip });
+    case 'TRIP_SELECTED':
+      return _.assign({}, state, { selectedTrip: action.trip });
     default:
       return state;
   }

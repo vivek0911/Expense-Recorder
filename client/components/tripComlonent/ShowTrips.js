@@ -5,6 +5,8 @@ import Moment from 'moment';
 import PropTypes from 'prop-types';
 import { Modal, FieldInput, Button, FieldDatePicker } from '../uiKit/UIKit';
 import asyncActions from '../../actions/asyncActions';
+import syncActions from '../../actions/syncActions';
+import AddExpense from '../expenseComponent/AddExpense';
 import './ShowTrips.scss';
 
 class ShowTrips extends Component {
@@ -13,12 +15,14 @@ class ShowTrips extends Component {
     this.state = {
       open: false,
       selectedTrip: '',
+      addExpense: false,
     };
   }
   componentDidMount() {
     this.props.dispatch(asyncActions.getAllTrips());
   }
-  showTripDetails(trip) {
+  tripSelected(trip) {
+    this.props.dispatch(syncActions.tripSelected(trip));
     this.setState({ selectedTrip: trip._id === this.state.selectedTrip._id ? '' : trip });
   }
   onDelete(tripId) {
@@ -42,13 +46,14 @@ class ShowTrips extends Component {
     .then(x => x.payload._id === t._id && this.setState({ open: false }));
   }
   selectedTrip(trip) {
+    const { addExpense } = this.state;
     return (
       <div className="trip-detail p-2">
         <div className="dates-wrap p-3">
           <span>Start Date : {Moment(trip.startDate).format('DD-MM-YYYY')}</span>
           <span>End Date : {Moment(trip.endDate).format('DD-MM-YYYY')}</span>
         </div>
-        <Button className="button btn-pink ml-3" style={{ height: '35px', width: '25%' }}>Add Expense</Button>
+        { addExpense ? <AddExpense style={{ width: '90%' }} /> : <Button onClick={() => this.setState({ addExpense: true })} className="button btn-pink ml-3" style={{ height: '35px', width: '25%' }}>Add Expense</Button>}
       </div>
     );
   }
@@ -73,8 +78,8 @@ class ShowTrips extends Component {
         {
           allTrips.map((trip, key) => (
             <div className="triplist mb-4" key={key}>
-              <div className="trip">
-                <span onClick={() => this.showTripDetails(trip)}>{trip.title}</span>
+              <div className="trip mb-2">
+                <span onClick={() => this.tripSelected(trip)}>{trip.title}</span>
                 <span onClick={() => this.onEdit(trip)}>Edit</span>
                 <span onClick={() => this.onDelete(trip._id)}>Delete</span>
               </div>

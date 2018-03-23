@@ -24,7 +24,6 @@ class AddTrip extends Component {
   }
   onSubmit(e) {
     e.preventDefault();
-    // console.log('add trip', this.state);
     this.props.dispatch(asyncActions.addTrip(this.state));
   }
   render() {

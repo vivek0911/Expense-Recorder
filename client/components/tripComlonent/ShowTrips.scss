@@ -1,6 +1,5 @@
 .show-trips-wrap {
   .triplist {
-    width: 60%;
     .trip {
       display: flex;
       span {
@@ -17,7 +16,11 @@
     }
     .trip-detail {
       border: 1px solid #de6060;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       .dates-wrap {
+        width: 100%;
         display: flex;
         justify-content: space-between;
       }

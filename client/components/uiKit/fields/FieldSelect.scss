@@ -1,16 +1,13 @@
 .field-select-wrapper {
   .field-select {
     width: 100%;
+    box-shadow: 0 0 1px 0 rgba(0,0,0,.35);
     .Select-control {
       border: none;
       .Select-value, .Select-placeholder {
         display: flex;
         align-items: center;
         font-size: 85%;
-        // color: darkblue;
-      }
-      .Select-placeholder {
-        padding-left: 2em; //not necessary for all select-input
       } 
     }
   }

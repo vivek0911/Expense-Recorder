@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
 // import asyncActions from '../../actions/asyncActions';
 import Header from '../header/Header';
 import AddTrip from '../tripComlonent/AddTrip';
 import ShowTrips from '../tripComlonent/ShowTrips';
+import ShowExpenses from '../expenseComponent/ShowExpenses';
 import './Dashboard.scss';
 
 class Dashboard extends Component {
@@ -21,8 +23,11 @@ class Dashboard extends Component {
           <div className="trip-part pt-5 col-3">
             <AddTrip />
           </div>
-          <div className="trips-list pt-5 col-9">
+          <div className="trips-list pt-5 col-5">
             <ShowTrips />
+          </div>
+          <div className="expense-list pt-5 col-4">
+            {!_.isEmpty(this.props.selectedTrip) && <ShowExpenses />}
           </div>
         </div>
       </div>
@@ -30,9 +35,12 @@ class Dashboard extends Component {
   }
 }
 
-Dashboard.defaultProps = {};
+Dashboard.defaultProps = {
+  selectedTrip: {},
+};
 Dashboard.propTypes = {
+  selectedTrip: PropTypes.object,
 };
 
-const select = state => state;
+const select = state => ({ selectedTrip: state.tripReducer.selectedTrip });
 export default connect(select)(Dashboard);

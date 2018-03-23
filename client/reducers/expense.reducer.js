@@ -19,6 +19,10 @@ export default (state = initialState.expense, action) => {
       const dTrip = action.payload.deletedTrip; // check payload
       const temp = (state.allExpenses || []).filter(e => e.tripId !== dTrip._id);
       return _.assign({}, state, { allExpenses: temp });
+    case 'CONVERT_CUREENCY_EXPENSE':
+      const obj = action.payload;
+      const newArr = (state.allExpenses || []).map(e => e._id === obj.id ? _.assign({}, e, { amount: obj.amt, baseCurrency: obj.curr }) : e);
+      return _.assign({}, state, { allExpenses: newArr });
     default:
       return state;
   }

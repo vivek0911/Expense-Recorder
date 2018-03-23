@@ -1,0 +1,10 @@
+.show-expense-wrap {
+  h3 {
+    text-transform: capitalize;
+  }
+  .expense {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #de6060;
+  }
+}
