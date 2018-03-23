@@ -11,8 +11,8 @@ class Modal extends Component {
   render() {
     const { style, onClose } = this.props;
     return (
-      <div className="hey-modal">
-        <div className="hey-overlay" onClick={onClose} />
+      <div className="er-modal">
+        <div className="er-overlay" onClick={onClose} />
         <div className="modal-data-container" style={style}>
           <i className="fa fa-times-circle cross-close" aria-hidden="true" onClick={onClose} />
           {this.props.children}

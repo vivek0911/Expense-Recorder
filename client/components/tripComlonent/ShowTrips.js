@@ -26,7 +26,8 @@ class ShowTrips extends Component {
     this.setState({ selectedTrip: trip._id === this.state.selectedTrip._id ? '' : trip });
   }
   onDelete(tripId) {
-    this.props.dispatch(asyncActions.deleteTrip(tripId));
+    const x = window.confirm('Are you sure you want to delete?');
+    if (x) this.props.dispatch(asyncActions.deleteTrip(tripId));
   }
   onEdit(trip) {
     this.setState({
@@ -60,12 +61,12 @@ class ShowTrips extends Component {
   renderModal() {
     const { open } = this.state;
     return (
-      <Modal style={{ padding: '0.7rem' }} onClose={() => this.setState({ open: false })}>
+      <Modal style={{ padding: '2rem' }} onClose={() => this.setState({ open: false })}>
         <form className="addtrip-form" onSubmit={e => this.onSubmit(e)}>
           <FieldInput value={open.title} onChange={v => this.onChange(v, 'title')} placeholder="Change Title" look="border" style={{ marginBottom: '30px' }} />
           <FieldDatePicker value={open.startDate} onChange={v => this.onChange(v, 'startDate')} placeholder="Change Start date" look="border" style={{ marginBottom: '30px' }} />
           <FieldDatePicker value={open.endDate} onChange={v => this.onChange(v, 'endDate')} placeholder="Change End date" look="border" style={{ marginBottom: '30px' }} />
-          <Button type="submit" className="button btn-pink" style={{ height: '35px' }}>Update Trip</Button>
+          <Button type="submit" className="button btn-pink" style={{ height: '35px' }}>Save</Button>
         </form>
       </Modal>
     );
@@ -74,7 +75,7 @@ class ShowTrips extends Component {
     const { allTrips } = this.props;
     const { open, selectedTrip } = this.state;
     return (
-      <div className="show-trips-wrap" style={{ height: '100vh' }}>
+      <div className="show-trips-wrap p-3" style={{ height: '100vh' }}>
         {
           allTrips.map((trip, key) => (
             <div className="triplist mb-4" key={key}>

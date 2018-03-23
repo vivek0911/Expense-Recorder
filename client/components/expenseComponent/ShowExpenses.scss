@@ -1,4 +1,5 @@
 .show-expense-wrap {
+  background: #fff;
   h3 {
     text-transform: capitalize;
   }
@@ -6,5 +7,24 @@
     display: flex;
     flex-direction: column;
     border: 1px solid #de6060;
+    .s3-attach {
+      display: flex;
+      flex-direction: column;
+    }
+    .success-msg {
+      color: green;
+      animation: FadeAnimation 4s ease-in .2s forwards;
+      @keyframes FadeAnimation {
+        0% {
+          opacity: 1;
+          visibility: visible;
+        }
+      
+        100% {
+          opacity: 0;
+          visibility: hidden;
+        }
+      }
+    }
   }
 }

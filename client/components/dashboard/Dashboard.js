@@ -20,13 +20,13 @@ class Dashboard extends Component {
       <div className="dash-wrap">
         <Header />
         <div className="trip-expe-contain d-flex flex-row">
-          <div className="trip-part pt-5 col-3">
+          <div className="pt-5 col-3">
             <AddTrip />
           </div>
-          <div className="trips-list pt-5 col-5">
+          <div className="pt-5 col-5">
             <ShowTrips />
           </div>
-          <div className="expense-list pt-5 col-4">
+          <div className="pt-5 col-4">
             {!_.isEmpty(this.props.selectedTrip) && <ShowExpenses />}
           </div>
         </div>

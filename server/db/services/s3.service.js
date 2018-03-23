@@ -30,6 +30,7 @@ exports.uploadFile = (bucket, key, path) => {
       if (err) {
         reject(err);
       } else {
+        // console.log('s3 success', response);
         resolve(response);
       }
     });

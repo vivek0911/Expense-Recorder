@@ -1,4 +1,4 @@
-.hey-modal {
+.er-modal {
   position:fixed;
   top:0;
   left:0;
@@ -6,7 +6,7 @@
   height:100%;
 //   overflow: scroll;
   z-index: 5;
-  .hey-overlay {
+  .er-overlay {
     position: absolute;
     z-index: 50;
     width: 100%;
@@ -18,7 +18,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 50%;
+    width: 40%;
     // height: 50%;
     z-index: 100;
     background: #fff;
