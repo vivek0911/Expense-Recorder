@@ -10,7 +10,6 @@ function makeRequest(method, api = '/login', data) {
 // s3 upload
 exports.uploadImage = (images, tripId, expenseId) => (dispatch) => {
   const data = new FormData();
-  console.log('async action call s3..');
   images.forEach(img => data.append('file', img));
   makeRequest('post', `/image/upload/${tripId}/${expenseId}`, data)
     .then(response => dispatch(syncActions.updatedExpense(response.data)));

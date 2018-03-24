@@ -27,7 +27,6 @@ class AddExpense extends Component {
   onSubmit(e) {
     e.preventDefault();
     const exp = _.assign({}, this.state, { date: Moment().toDate(), tripId: this.props.selectedTrip._id });
-    // console.log('...', exp);
     this.props.dispatch(asyncActions.addExpense(exp));
   }
   render() {
@@ -55,5 +54,5 @@ AddExpense.propTypes = {
   selectedTrip: PropTypes.object,
 };
 
-const select = state => ({ selectedTrip: state.tripReducer.selectedTrip });
+const select = state => ({ selectedTrip: state.tripReducer.toJS().selectedTrip });
 export default connect(select)(AddExpense);

@@ -1,4 +1,6 @@
-const initialState = {
+import Immutable from 'immutable';
+
+const initialState = Immutable.fromJS({
   trip: {
     allTrips: [],
     selectedTrip: {},
@@ -6,6 +8,6 @@ const initialState = {
   expense: {
     allExpenses: [],
   },
-};
+});
 
 export default initialState;

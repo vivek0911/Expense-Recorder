@@ -5,10 +5,10 @@ import Select from 'react-select';
 import './FieldSelect.scss';
 
 const FieldSelect = ({ options, onChange, value, height, style, placeholder }) => {
-  console.log('field select');
   return (
     <div className="field-select-wrapper" {...{ style }}>
       <Select
+        removeSelected={false}
         style={{ height }}
         value={value}
         className="field-select"

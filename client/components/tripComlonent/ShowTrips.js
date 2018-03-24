@@ -102,5 +102,5 @@ ShowTrips.propTypes = {
   allTrips: PropTypes.array,
 };
 
-const select = state => ({ allTrips: state.tripReducer.allTrips });
+const select = state => ({ allTrips: state.tripReducer.toJS().allTrips });
 export default connect(select)(ShowTrips);

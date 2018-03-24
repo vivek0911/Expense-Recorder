@@ -42,5 +42,5 @@ Dashboard.propTypes = {
   selectedTrip: PropTypes.object,
 };
 
-const select = state => ({ selectedTrip: state.tripReducer.selectedTrip });
+const select = state => ({ selectedTrip: state.tripReducer.toJS().selectedTrip });
 export default connect(select)(Dashboard);

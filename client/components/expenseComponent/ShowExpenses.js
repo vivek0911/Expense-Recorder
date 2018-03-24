@@ -24,12 +24,13 @@ class ShowExpenses extends Component {
     this.props.dispatch(asyncActions.getAllExpenses());
   }
 
-  onChange(v, field, exp) {
+  onChange(v, exp) {
     const api = 'http://data.fixer.io/api/latest?access_key=77e7cfbf1b3406a82f536052133b139f';
     Request.get(api).then((d) => {
       const base = exp.baseCurrency;
       const newAmt = (d.data.rates[v] / d.data.rates[base]) * exp.amount;
-      this.props.dispatch(syncActions.convertCurrencyOfExpense({ id: exp._id, curr: v, amt: newAmt }));
+      const newExp = _.assign({}, exp, { amount: newAmt, baseCurrency: v });
+      this.props.dispatch(syncActions.convertCurrencyOfExpense(newExp));
     });
   }
   onDelete(exp) {
@@ -60,12 +61,12 @@ class ShowExpenses extends Component {
                 <span className="mb-2">Category: {exp.category}</span>
                 <div className="d-flex align-items-center mb-2">
                   <span className="mr-3">Amount: {(exp.amount).toFixed(2)}</span>
-                  <FieldSelect value={exp.baseCurrency} onChange={v => this.onChange(v, 'baseCurrency', exp)} options={Data.currency} height="10px" style={{ width: '20%' }} />
+                  <FieldSelect value={exp.baseCurrency} onChange={v => this.onChange(v, exp)} options={Data.currency} height="10px" style={{ width: '20%' }} />
                 </div>
                 <span className="mb-2">Date: {Moment(exp.date).format('DD-MM-YYYY')}</span>
                 <span className="mb-2">Discription: {exp.discription}</span>
-                <Dropzone style={{ cursor: 'pointer' }} onDrop={files => this.uploadImage(files, exp)}>
-                  <Button className="mb-2" style={{ width: '30%' }}>Add Attachment</Button>
+                <Dropzone style={{}} onDrop={files => this.uploadImage(files, exp)}>
+                  <Button className="mb-2" style={{ width: '30%', cursor: 'pointer' }}>Add Attachment</Button>
                 </Dropzone>
                 <div className="s3-attach">
                   {(exp.images || []).map((img, k) => (
@@ -98,5 +99,5 @@ ShowExpenses.propTypes = {
   allExpe: PropTypes.array,
 };
 
-const select = state => ({ selectedTrip: state.tripReducer.selectedTrip, allExpe: state.expenseReducer.allExpenses });
+const select = state => ({ selectedTrip: state.tripReducer.toJS().selectedTrip, allExpe: state.expenseReducer.toJS().allExpenses });
 export default connect(select)(ShowExpenses);
