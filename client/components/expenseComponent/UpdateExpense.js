@@ -39,7 +39,10 @@ class UpdateExpense extends Component {
         <FieldSelect value={category} onChange={v => this.onChange(v, 'category')} options={Data.category} placeholder="Select category" height="35px" style={{ marginBottom: '30px' }} />
         <FieldInput value={amount} onChange={v => this.onChange(v, 'amount')} placeholder="Amount in INR" look="border" style={{ marginBottom: '30px' }} />
         <FieldInput value={discription} onChange={v => this.onChange(v, 'discription')} placeholder="Discription" look="border" style={{ marginBottom: '30px' }} />
-        <Button type="submit" className="button btn-pink" style={{ height: '35px' }}>Save</Button>
+        <div className="d-flex justify-content-between">
+          <Button className="button btn-white" onClick={() => this.props.onCancel()} style={{ height: '35px', width: '40%' }}>Cancel</Button>
+          <Button type="submit" className="button btn-pink" style={{ height: '35px', width: '40%' }}>Save</Button>
+        </div>
       </form>
     );
   }
@@ -49,12 +52,14 @@ UpdateExpense.defaultProps = {
   dispatch: () => {},
   expense: {},
   onUpdate: () => {},
+  onCancel: () => {},
 };
 
 UpdateExpense.propTypes = {
   dispatch: PropTypes.func,
   expense: PropTypes.object,
   onUpdate: PropTypes.func,
+  onCancel: PropTypes.func,
 };
 
 const select = state => state;

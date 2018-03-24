@@ -51,8 +51,8 @@ class ShowTrips extends Component {
     return (
       <div className="trip-detail p-2">
         <div className="dates-wrap p-3">
-          <span>Start Date : {Moment(trip.startDate).format('DD-MM-YYYY')}</span>
-          <span>End Date : {Moment(trip.endDate).format('DD-MM-YYYY')}</span>
+          <span>Start Date : {Moment(trip.startDate).isValid() ? Moment(trip.startDate).format('DD-MM-YYYY') : 'Not Available'}</span>
+          <span>End Date : {Moment(trip.endDate).isValid() ? Moment(trip.endDate).format('DD-MM-YYYY') : 'Not Available'}</span>
         </div>
         { addExpense ? <AddExpense style={{ width: '90%' }} /> : <Button onClick={() => this.setState({ addExpense: true })} className="button btn-pink ml-3" style={{ height: '35px', width: '25%' }}>Add Expense</Button>}
       </div>

@@ -64,8 +64,8 @@ class ShowExpenses extends Component {
                 </div>
                 <span className="mb-2">Date: {Moment(exp.date).format('DD-MM-YYYY')}</span>
                 <span className="mb-2">Discription: {exp.discription}</span>
-                <Dropzone style={{ cursor: 'pointer' }} onDrop={files => this.uploadImage(files, exp)}>
-                  <Button className="mb-2" style={{ width: '30%' }}>Add Attachment</Button>
+                <Dropzone style={{}} onDrop={files => this.uploadImage(files, exp)}>
+                  <Button className="mb-2" style={{ width: '30%', cursor: 'pointer' }}>Add Attachment</Button>
                 </Dropzone>
                 <div className="s3-attach">
                   {(exp.images || []).map((img, k) => (
@@ -74,12 +74,12 @@ class ShowExpenses extends Component {
                 </div>
                 <div className="d-flex justify-content-between mb-2">
                   <Button className="button btn-pink" onClick={() => this.onUpdate(exp)} style={{ height: '35px', width: '40%' }}>UPDATE</Button>
-                  <Button className="button btn-pink" onClick={() => this.onDelete(exp)} style={{ height: '35px', width: '40%' }}>DELETE</Button>
+                  <Button className="button btn-white" onClick={() => this.onDelete(exp)} style={{ height: '35px', width: '40%' }}>DELETE</Button>
                 </div>
                 {exp._id === updated && <span className="success-msg mt-2">Successfully Updated</span>}
               </div>
             :
-              <UpdateExpense expense={exp} onUpdate={v => this.onUpdate(v)} />
+              <UpdateExpense expense={exp} onUpdate={v => this.onUpdate(v)} onCancel={() => this.setState({ updateExp: false })} />
           ))
         }
       </div>
