@@ -49,7 +49,7 @@ class ShowExpenses extends Component {
     const { updateExp, updated } = this.state;
     const expeForTrip = (allExpe || []).filter(expe => expe.tripId === selectedTrip._id);
     return (
-      <div className="show-expense-wrap p-2">
+      <div className="show-expense-wrap px-2 pb-2">
         <h3>Expenses of {selectedTrip.title}</h3>
         {_.isEmpty(expeForTrip) && <span>No expense is added yet</span>}
         {

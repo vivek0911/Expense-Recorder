@@ -22,7 +22,7 @@ class ShowTrips extends Component {
     this.props.dispatch(asyncActions.getAllTrips());
   }
   tripSelected(trip) {
-    this.props.dispatch(syncActions.tripSelected(trip));
+    if (this.props.selectedTrip._id !== trip._id) this.props.dispatch(syncActions.tripSelected(trip));
     this.setState({ selectedTrip: trip._id === this.state.selectedTrip._id ? '' : trip });
   }
   onDelete(tripId) {
@@ -75,7 +75,8 @@ class ShowTrips extends Component {
     const { allTrips } = this.props;
     const { open, selectedTrip } = this.state;
     return (
-      <div className="show-trips-wrap p-3" style={{ height: '100vh' }}>
+      <div className="show-trips-wrap p-3">
+        {_.isEmpty(allTrips) && <span style={{ fontSize: '2rem', color: '#de6060' }}>No trip is added yet</span>}
         {
           allTrips.map((trip, key) => (
             <div className="triplist mb-4" key={key}>
@@ -102,5 +103,5 @@ ShowTrips.propTypes = {
   allTrips: PropTypes.array,
 };
 
-const select = state => ({ allTrips: state.tripReducer.allTrips });
+const select = state => ({ allTrips: state.tripReducer.allTrips, selectedTrip: state.tripReducer.selectedTrip });
 export default connect(select)(ShowTrips);
