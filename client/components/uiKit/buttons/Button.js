@@ -6,7 +6,7 @@ import './Button.scss';
 const Button = ({ type, children, disabled, onClick, style, className }) => {
   return (
     <button
-      className={`button ${className}`} {...{ disabled, style, type }}
+      className={`button ${className} ${disabled && 'btn-dis'}`} {...{ disabled, style, type }}
       onClick={() => onClick()}
     >
       {children}

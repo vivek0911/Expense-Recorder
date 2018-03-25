@@ -22,7 +22,7 @@ class ShowTrips extends Component {
     this.props.dispatch(asyncActions.getAllTrips());
   }
   tripSelected(trip) {
-    this.props.dispatch(syncActions.tripSelected(trip));
+    if (this.props.selectedTrip._id !== trip._id) this.props.dispatch(syncActions.tripSelected(trip));
     this.setState({ selectedTrip: trip._id === this.state.selectedTrip._id ? '' : trip });
   }
   onDelete(tripId) {
@@ -51,8 +51,8 @@ class ShowTrips extends Component {
     return (
       <div className="trip-detail p-2">
         <div className="dates-wrap p-3">
-          <span>Start Date : {Moment(trip.startDate).format('DD-MM-YYYY')}</span>
-          <span>End Date : {Moment(trip.endDate).format('DD-MM-YYYY')}</span>
+          <span>Start Date : {Moment(trip.startDate).isValid() ? Moment(trip.startDate).format('DD-MM-YYYY') : 'Not Available'}</span>
+          <span>End Date : {Moment(trip.endDate).isValid() ? Moment(trip.endDate).format('DD-MM-YYYY') : 'Not Available'}</span>
         </div>
         { addExpense ? <AddExpense style={{ width: '90%' }} /> : <Button onClick={() => this.setState({ addExpense: true })} className="button btn-pink ml-3" style={{ height: '35px', width: '25%' }}>Add Expense</Button>}
       </div>
@@ -75,7 +75,8 @@ class ShowTrips extends Component {
     const { allTrips } = this.props;
     const { open, selectedTrip } = this.state;
     return (
-      <div className="show-trips-wrap p-3" style={{ height: '100vh' }}>
+      <div className="show-trips-wrap p-3">
+        {_.isEmpty(allTrips) && <span style={{ fontSize: '2rem', color: '#de6060' }}>No trip is added yet</span>}
         {
           allTrips.map((trip, key) => (
             <div className="triplist mb-4" key={key}>
@@ -102,5 +103,5 @@ ShowTrips.propTypes = {
   allTrips: PropTypes.array,
 };
 
-const select = state => ({ allTrips: state.tripReducer.toJS().allTrips });
+const select = state => ({ allTrips: state.tripReducer.toJS().allTrips, selectedTrip: state.tripReducer.toJS().selectedTrip });
 export default connect(select)(ShowTrips);

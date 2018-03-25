@@ -15,16 +15,16 @@ export default (state = initialState.get('trip'), action) => {
       // const newTrip = action.payload;
       // const updatedTrips = (state.allTrips || []).map(t => t._id === newTrip._id ? newTrip : t);
       // return _.assign({}, state, { allTrips: updatedTrips });
-      const newTrip = Immutable.fromJS(action.payload);
-      const updatedTrips = List(state.get('allTrips')).map(t => t._id === newTrip.get('_id') ? newTrip : t);
+      const newTrip = action.payload;
+      const updatedTrips = List(state.get('allTrips')).map(t => t._id === newTrip._id ? newTrip : t);
       return state.set('allTrips', updatedTrips);
     case 'DELETED_TRIP':
       // const dTrip = action.payload.deletedTrip;
       // const newTripArr = (state.allTrips || []).filter(t => t._id !== dTrip._id);
       // return _.assign({}, state, { allTrips: newTripArr, selectedTrip: state.selectedTrip._id === dTrip._id ? {} : state.selectedTrip });
-      const dTrip = Immutable.fromJS(action.payload.deletedTrip);
-      const newTripArr = List(state.get('allTrips')).filter(t => t._id !== dTrip.get('_id'));
-      return state.set('allTrips', newTripArr).set('selectedTrip', state.get('selectedTrip')._id === dTrip.get('_id') ? {} : state.get('selectedTrip'));
+      const dTrip = action.payload.deletedTrip;
+      const newTripArr = List(state.get('allTrips')).filter(t => t._id !== dTrip._id);
+      return state.set('allTrips', newTripArr).set('selectedTrip', state.get('selectedTrip')._id === dTrip._id ? {} : state.get('selectedTrip'));
     case 'TRIP_SELECTED':
       // return _.assign({}, state, { selectedTrip: action.trip });
       return state.set('selectedTrip', action.trip);

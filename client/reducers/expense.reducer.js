@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import Immutable, { List } from 'immutable';
+import { List } from 'immutable';
 import initialState from './initialState';
 
 export default (state = initialState.get('expense'), action) => {
@@ -16,19 +16,19 @@ export default (state = initialState.get('expense'), action) => {
       // const newExpe = action.payload;
       // const updatedExpes = (state.allExpenses || []).map(e => e._id === newExpe._id ? newExpe : e);
       // return _.assign({}, state, { allExpenses: updatedExpes });
-      const newExpe = Immutable.fromJS(action.payload);
-      const updatedExpes = List(state.get('allExpenses')).map(e => e._id === newExpe.get('_id') ? newExpe : e);
+      const newExpe = action.payload;
+      const updatedExpes = List(state.get('allExpenses')).map(e => e._id === newExpe._id ? newExpe : e);
       return state.set('allExpenses', updatedExpes);
     case 'DELETED_EXPENSE':
       // const dExpe = action.payload;
       // const newExpeArr = (state.allExpenses || []).filter(e => e._id !== dExpe._id);
       // return _.assign({}, state, { allExpenses: newExpeArr });
-      const dExpe = Immutable.fromJS(action.payload);
-      const newExpeArr = List(state.get('allExpenses')).filter(e => e._id !== dExpe.get('_id'));
+      const dExpe = action.payload;
+      const newExpeArr = List(state.get('allExpenses')).filter(e => e._id !== dExpe._id);
       return state.set('allExpenses', newExpeArr);
     case 'DELETED_TRIP':
-      const dTrip = Immutable.fromJS(action.payload.deletedTrip);
-      const temp = List(state.get('allExpenses')).filter(e => e.tripId !== dTrip.get('_id'));
+      const dTrip = action.payload.deletedTrip;
+      const temp = List(state.get('allExpenses')).filter(e => e.tripId !== dTrip._id);
       return state.set('allExpenses', temp);
     case 'CONVERT_CUREENCY_EXPENSE':
       const obj = action.payload;

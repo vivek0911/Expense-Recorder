@@ -50,7 +50,7 @@ class ShowExpenses extends Component {
     const { updateExp, updated } = this.state;
     const expeForTrip = (allExpe || []).filter(expe => expe.tripId === selectedTrip._id);
     return (
-      <div className="show-expense-wrap p-2">
+      <div className="show-expense-wrap px-2 pb-2">
         <h3>Expenses of {selectedTrip.title}</h3>
         {_.isEmpty(expeForTrip) && <span>No expense is added yet</span>}
         {
@@ -75,12 +75,12 @@ class ShowExpenses extends Component {
                 </div>
                 <div className="d-flex justify-content-between mb-2">
                   <Button className="button btn-pink" onClick={() => this.onUpdate(exp)} style={{ height: '35px', width: '40%' }}>UPDATE</Button>
-                  <Button className="button btn-pink" onClick={() => this.onDelete(exp)} style={{ height: '35px', width: '40%' }}>DELETE</Button>
+                  <Button className="button btn-white" onClick={() => this.onDelete(exp)} style={{ height: '35px', width: '40%' }}>DELETE</Button>
                 </div>
                 {exp._id === updated && <span className="success-msg mt-2">Successfully Updated</span>}
               </div>
             :
-              <UpdateExpense expense={exp} onUpdate={v => this.onUpdate(v)} />
+              <UpdateExpense expense={exp} onUpdate={v => this.onUpdate(v)} onCancel={() => this.setState({ updateExp: false })} />
           ))
         }
       </div>

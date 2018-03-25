@@ -21,13 +21,12 @@ class AddExpense extends Component {
   onChange(v, field) {
     this.setState({ [field]: v });
   }
-//   componentWillReceiveProps() {
-//     this.setState({ title: '', startDate: '', endDate: '' });
-//   }
+
   onSubmit(e) {
     e.preventDefault();
     const exp = _.assign({}, this.state, { date: Moment().toDate(), tripId: this.props.selectedTrip._id });
-    this.props.dispatch(asyncActions.addExpense(exp));
+    this.props.dispatch(asyncActions.addExpense(exp))
+    .then(x => x.payload._id && this.setState({ category: '', amount: '', discription: '' }));
   }
   render() {
     const { category, amount, discription } = this.state;
@@ -37,7 +36,7 @@ class AddExpense extends Component {
         <FieldSelect value={category} onChange={v => this.onChange(v, 'category')} options={Data.category} placeholder="Select category" height="35px" style={{ marginBottom: '30px' }} />
         <FieldInput value={amount} onChange={v => this.onChange(v, 'amount')} placeholder="Amount in INR" look="border" style={{ marginBottom: '30px' }} />
         <FieldInput value={discription} onChange={v => this.onChange(v, 'discription')} placeholder="Discription" look="border" style={{ marginBottom: '30px' }} />
-        <Button type="submit" className="button btn-pink" style={{ height: '35px' }}>Add Expense</Button>
+        <Button type="submit" disabled={_.isEmpty(category) || _.isEmpty(amount)} className="button btn-pink" style={{ height: '35px' }}>Add Expense</Button>
       </form>
     );
   }

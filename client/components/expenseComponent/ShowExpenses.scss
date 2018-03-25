@@ -1,11 +1,12 @@
 .show-expense-wrap {
-  background: #fff;
+  // background: #fff;
   h3 {
     text-transform: capitalize;
   }
   .expense {
     display: flex;
     flex-direction: column;
+    background: #fff;
     border: 1px solid #de6060;
     .s3-attach {
       display: flex;
