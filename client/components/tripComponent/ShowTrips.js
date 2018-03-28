@@ -79,11 +79,6 @@ class ShowTrips extends Component {
     const { open, selectedTrip } = this.state;
     return (
       <div className="show-trips-wrap p-3">
-        <input
-          type="search" placeholder="Search Your Trip" className="p-1 mb-2"
-          style={{ border: '1px solid #D8E1E8', borderRadius: '10px', outline: 'none' }}
-          onChange={e => this.onSearch(e.target.value)}
-        />
         {_.isEmpty(allTrips) && <span style={{ fontSize: '2rem', color: '#de6060' }}>No trip is added yet</span>}
         {
           allTrips.map((trip, key) => (

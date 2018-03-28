@@ -7,6 +7,13 @@
     { "value": "Transport", "label": "Transport" },
     { "value": "MISC", "label": "MISC" }
   ],
+  "tripType": [
+    { "value": "A", "label": "A" },
+    { "value": "B", "label": "B" },
+    { "value": "C", "label": "C" },
+    { "value": "D", "label": "D" },
+    { "value": "E", "label": "E" }
+  ],
   "currency": [
     { "value": "AED", "label": "AED" },
     { "value": "AFN", "label": "AFN" },

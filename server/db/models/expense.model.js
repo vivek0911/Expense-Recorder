@@ -4,8 +4,9 @@ const Schema = mongoose.Schema;
 
 const expenseSchema = new Schema({
   tripId: { type: Schema.ObjectId, ref: 'Trip', required: true },
-  category: { type: String, required: true }, // can be defined as enum
+  category: { type: String, required: true },
   date: Date,
+  place: String,
   amount: { type: Number, required: true },
   baseCurrency: String,
   discription: String,

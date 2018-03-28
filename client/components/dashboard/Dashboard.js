@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
-// import asyncActions from '../../actions/asyncActions';
+import { Route } from 'react-router-dom';
+// import _ from 'lodash';
 import Header from '../header/Header';
-import AddTrip from '../tripComlonent/AddTrip';
-import ShowTrips from '../tripComlonent/ShowTrips';
-import ShowExpenses from '../expenseComponent/ShowExpenses';
+import AddTrip from '../tripComponent/AddTrip';
+import UpdateTrip from '../tripComponent/UpdateTrip';
+import ShowTrips from '../tripComponent/ShowTrips2';
 import './Dashboard.scss';
 
 class Dashboard extends Component {
@@ -16,19 +16,16 @@ class Dashboard extends Component {
   }
 
   render() {
+    const { match } = this.props;
     return (
       <div className="dash-wrap">
         <Header />
-        <div className="trip-expe-contain d-flex flex-row">
-          <div className="pt-5 col-3">
-            <AddTrip />
-          </div>
-          <div className="pt-5 col-5">
-            <ShowTrips />
-          </div>
-          <div className="pt-5 col-4">
-            {!_.isEmpty(this.props.selectedTrip) && <ShowExpenses />}
-          </div>
+        <div className="trip-expe-contain mt-4">
+          <Route exact path={match.url} component={ShowTrips} />
+          <Route exact path={`${match.url}/addtrip`} component={AddTrip} />
+          <Route
+            exact path={`${match.url}/trip/:id/update`} render={props => <UpdateTrip trip={props.location.state.trip} />}
+          />
         </div>
       </div>
     );
@@ -36,11 +33,11 @@ class Dashboard extends Component {
 }
 
 Dashboard.defaultProps = {
-  selectedTrip: {},
+  match: {},
 };
 Dashboard.propTypes = {
-  selectedTrip: PropTypes.object,
+  match: PropTypes.object,
 };
 
-const select = state => ({ selectedTrip: state.tripReducer.selectedTrip });
+const select = state => state;
 export default connect(select)(Dashboard);

@@ -1,7 +1,11 @@
 .dash-wrap {
   font-family: Roboto,sans-serif;
-  background: #f2f2f2;
+  // background: #f2f2f2;
+  height: 100vh;
+  padding-bottom: 3rem;
   .trip-expe-contain {
     height: 100%;
+    width: 70%;
+    margin: 0 auto;
   }
 }

@@ -1,0 +1,26 @@
+.show-trips-wrap {
+  .st-top-bar {}
+  .st-list {
+    .first-row {
+      font-weight: bold;
+    }
+    .common {
+      display: flex;
+      span {
+        flex: 1;
+      }
+    }
+    .triplist-row {
+      span:first-child {
+        text-transform: capitalize;
+      }
+      span:last-child {
+        i {
+          font-size: 1.6vw;
+          cursor: pointer;
+          color: #808080;
+        }
+      }
+    }
+  }
+}
