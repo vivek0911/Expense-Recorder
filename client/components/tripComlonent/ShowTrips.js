@@ -34,6 +34,9 @@ class ShowTrips extends Component {
       open: _.assign({}, trip, { title: trip.title, startDate: Moment(trip.startDate).toDate(), endDate: Moment(trip.endDate).toDate() }),
     });
   }
+  onSearch(text) {
+    this.props.dispatch(syncActions.filterTrips({ text }));
+  }
   onChange(v, path) {
     const value = Moment(v).isValid() ? Moment(v).toDate() : v;
     const updatedValues = _.cloneDeep(this.state.open);
@@ -76,6 +79,11 @@ class ShowTrips extends Component {
     const { open, selectedTrip } = this.state;
     return (
       <div className="show-trips-wrap p-3">
+        <input
+          type="search" placeholder="Search Your Trip" className="p-1 mb-2"
+          style={{ border: '1px solid #D8E1E8', borderRadius: '10px', outline: 'none' }}
+          onChange={e => this.onSearch(e.target.value)}
+        />
         {_.isEmpty(allTrips) && <span style={{ fontSize: '2rem', color: '#de6060' }}>No trip is added yet</span>}
         {
           allTrips.map((trip, key) => (

@@ -17,7 +17,7 @@ class AddTrip extends Component {
     };
   }
   onChange(v, field) {
-    const value = Moment(v).isValid() ? Moment(v).toDate() : v;
+    const value = (field === 'startDate' || field === 'startDate') && Moment(v).isValid() ? Moment(v).toDate() : v;
     this.setState({ [field]: value });
   }
   onSubmit(e) {

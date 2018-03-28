@@ -2,6 +2,7 @@ const initialState = {
   trip: {
     allTrips: [],
     selectedTrip: {},
+    tripsData: [],
   },
   expense: {
     allExpenses: [],
