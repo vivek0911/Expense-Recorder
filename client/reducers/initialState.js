@@ -8,6 +8,9 @@ const initialState = {
   expense: {
     allExpenses: [],
   },
+  rate: {
+    rates: {},
+  },
 };
 
 export default initialState;

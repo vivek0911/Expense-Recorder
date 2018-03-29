@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Moment from 'moment';
-import _ from 'lodash';
 import { withRouter, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-// import Request from 'axios';
 import Dropzone from 'react-dropzone';
 import asyncActions from '../../actions/asyncActions';
-// import syncActions from '../../actions/syncActions';
-// import { FieldSelect, Button } from '../uiKit/UIKit';
-// import Data from '../../constants/Data.json';
+import syncActions from '../../actions/syncActions';
+import { FieldSelect } from '../uiKit/UIKit';
+import Data from '../../constants/Data.json';
 import './TripExpenses.scss';
 
 class TripExpenses extends Component {
   constructor() {
     super();
     this.state = {
+      x: false,
     };
   }
   componentDidMount() {
@@ -26,11 +25,19 @@ class TripExpenses extends Component {
     const tripId = exp.tripId;
     if (x) this.props.dispatch(asyncActions.deleteExpense(tripId, exp._id));
   }
+  onChange(v, exp) {
+    const { rates } = this.props;
+    const base = exp.baseCurrency;
+    const newAmt = (rates[v] / rates[base]) * exp.amount;
+    this.props.dispatch(syncActions.convertCurrencyOfExpense({ id: exp._id, curr: v, amt: newAmt.toFixed(2) }));
+    this.setState({ x: false });
+  }
   uploadImage(images, exp) {
     this.props.dispatch(asyncActions.uploadImage(images, exp.tripId, exp._id));
   }
   render() {
     const { trip, tripExpe, history } = this.props;
+    const { x } = this.state;
     return (
       tripExpe.length === 0
       ?
@@ -75,7 +82,11 @@ class TripExpenses extends Component {
                   </div>
                   <div className="comm-row mb-2">
                     <div className="amount comm-item">
-                      <span>Amount</span><span>{expe.amount}&nbsp;{expe.baseCurrency}</span>
+                      <span>Amount</span>
+                      <span>
+                        <text>{expe.amount}&nbsp;</text>
+                        {x === expe._id ? <FieldSelect value={expe.baseCurrency} onChange={v => this.onChange(v, expe)} options={Data.currency} style={{ width: '50%' }} /> : <text onClick={() => this.setState({ x: expe._id })} style={{ cursor: 'pointer' }}>{expe.baseCurrency}</text>}
+                      </span>
                     </div>
                     <div className="add-note comm-item">
                       <span>Note</span><span>{expe.discription || 'NA'}</span>
@@ -98,15 +109,17 @@ class TripExpenses extends Component {
 TripExpenses.defaultProps = {
   dispatch: () => {},
   trip: {},
+  rates: {},
   tripExpe: [],
   history: {},
 };
 TripExpenses.propTypes = {
   dispatch: PropTypes.func,
   trip: PropTypes.object,
+  rates: PropTypes.object,
   tripExpe: PropTypes.array,
   history: PropTypes.object,
 };
 
-const select = state => ({ tripExpe: state.tripReducer.tripExpenses });
+const select = state => ({ tripExpe: state.tripReducer.tripExpenses, rates: state.ratesReducer.rates });
 export default withRouter(connect(select)(TripExpenses));

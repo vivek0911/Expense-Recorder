@@ -23,6 +23,10 @@ export default (state = initialState.trip, action) => {
     case 'GOT_ALL_EXPENSES_OF_TRIP':
       return _.assign({}, state, { tripExpenses: action.payload });
 
+    case 'CONVERT_CUREENCY_EXPENSE':
+      const obj = action.payload;
+      const newArr = (state.tripExpenses || []).map(e => e._id === obj.id ? _.assign({}, e, { amount: obj.amt, baseCurrency: obj.curr }) : e);
+      return _.assign({}, state, { tripExpenses: newArr });
     case 'UPDATED_EXPENSE':
       const newExpe = action.payload;
       const updatedExpes = (state.tripExpenses || []).map(e => e._id === newExpe._id ? newExpe : e);

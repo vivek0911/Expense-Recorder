@@ -67,8 +67,12 @@
         }
         .amount {
           span:last-child {
-            color: #5bc5a7;
-            font-weight: 500;
+            // display: flex;
+            text {
+              color: #5bc5a7;
+              font-weight: 500;
+            }
+            div span input { height: 25px; }
           }
         }
       }

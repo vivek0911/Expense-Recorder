@@ -4,21 +4,19 @@ import PropTypes from 'prop-types';
 import Select from 'react-select';
 import './FieldSelect.scss';
 
-const FieldSelect = ({ options, onChange, value, height, style, placeholder }) => {
-  return (
-    <div className="field-select-wrapper" {...{ style }}>
-      <Select
-        style={{ height }}
-        value={value}
-        className="field-select"
-        options={options}
-        placeholder={placeholder}
-        simpleValue
-        onChange={v => onChange(v)}
-      />
-    </div>
+const FieldSelect = ({ options, onChange, value, height, style, placeholder }) => (
+  <div className="field-select-wrapper" {...{ style }}>
+    <Select
+      style={{ height }}
+      value={value}
+      className="field-select"
+      options={options}
+      placeholder={placeholder}
+      simpleValue
+      onChange={v => onChange(v)}
+    />
+  </div>
   );
-};
 
 FieldSelect.defaultProps = {
   placeholder: 'choose option',

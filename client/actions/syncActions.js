@@ -15,3 +15,4 @@ exports.filterTrips = payload => ({ type: 'FILTER_TRIP', payload });
 
 // trip-expenses
 exports.gotExpensesByTripId = payload => ({ type: 'GOT_ALL_EXPENSES_OF_TRIP', payload });
+exports.currencyRates = payload => ({ type: 'STORE_RATES', payload });

@@ -6,7 +6,7 @@ import { Route } from 'react-router-dom';
 import Header from '../header/Header';
 import AddTrip from '../tripComponent/AddTrip';
 import UpdateTrip from '../tripComponent/UpdateTrip';
-import ShowTrips from '../tripComponent/ShowTrips2';
+import ShowTrips from '../tripComponent/ShowTrips';
 import './Dashboard.scss';
 
 class Dashboard extends Component {

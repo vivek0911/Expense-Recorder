@@ -16,8 +16,3 @@ export default () => (
     <Redirect to="/dashboard" />
   </Switch>
 );
-
-// fix api call from dashboard
-// fix currency conversion and total expense of trip
-
-// delete ShowTrip from tripComponent
