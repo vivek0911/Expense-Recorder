@@ -1,1 +1,10 @@
-.add-expense-form {}
+.add-expense-form {
+  padding: 1rem 25%;
+  background: #fff;
+  height: 100%;
+  h5 {
+    span {
+      text-transform: capitalize;
+    }
+  }
+}

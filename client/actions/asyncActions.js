@@ -40,3 +40,7 @@ exports.updateExpense = (expense, tripId, expenseId) => dispatch => makeRequest(
 
 exports.deleteExpense = (tripId, expenseId) => dispatch => makeRequest('delete', `/trip/${tripId}/expense/${expenseId}`)
   .then(response => dispatch(syncActions.deletedExpense(response.data)));
+
+// trip-expense
+exports.getExpensesByTripId = tripId => dispatch => makeRequest('get', `/tripexpenses/${tripId}`)
+  .then(response => dispatch(syncActions.gotExpensesByTripId(response.data)));

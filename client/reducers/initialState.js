@@ -3,6 +3,7 @@ const initialState = {
     allTrips: [],
     selectedTrip: {},
     tripsData: [],
+    tripExpenses: [],
   },
   expense: {
     allExpenses: [],

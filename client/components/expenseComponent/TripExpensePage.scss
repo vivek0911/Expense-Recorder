@@ -1,0 +1,15 @@
+.trip-expense-wrap {
+  min-height: 100vh;
+  .trip-expe {
+    display: flex;
+    height: 100%;
+    background: #f2f2f2;
+    .trip-detail-wrap {
+      flex: 2;
+      background: #fff;
+    }
+    .trip-expense-wrap {
+      flex: 4;
+    }
+  }
+}

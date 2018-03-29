@@ -32,6 +32,7 @@ class AddTrip extends Component {
     const { title, type, startDate, endDate } = this.state;
     return (
       <form className="addtrip-form" onSubmit={e => this.onSubmit(e)}>
+        <h3 className="mb-3">Add New Trip</h3>
         <FieldInput value={title} onChange={v => this.onChange(v, 'title')} placeholder="Title of your trip" look="border" style={{ marginBottom: '30px' }} />
         <FieldSelect value={type} onChange={v => this.onChange(v, 'type')} options={Data.tripType} placeholder="Choose type" height="35px" style={{ marginBottom: '30px' }} />
         <FieldDatePicker value={startDate} onChange={v => this.onChange(v, 'startDate')} placeholder="Start date" style={{ marginBottom: '30px' }} />

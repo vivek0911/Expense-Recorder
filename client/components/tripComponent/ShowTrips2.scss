@@ -1,5 +1,15 @@
 .show-trips-wrap {
-  .st-top-bar {}
+  .st-top-bar {
+    div input {
+      border: 1px solid #D8E1E8;
+      border-radius: 10px;
+      outline: none;
+      padding: 5px 10px;
+      &:focus, &:active {
+        border: 1px solid #4d8ee4;
+      }
+    }
+  }
   .st-list {
     .first-row {
       font-weight: bold;
@@ -22,5 +32,18 @@
         }
       }
     }
+  }
+}
+.welcome-msg {
+  font-size: 1.5vw;
+  height: 100%;
+  color: black; //#4d8ee4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  div:first-child {
+    margin-bottom: 1rem;
+    font-size: 2vw;
   }
 }

@@ -1,0 +1,102 @@
+.trip-expenses-wrap {
+  h5 span { text-transform: capitalize; }
+  .expe-cards-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    .expense {
+      background: #fff;
+      width: 47%;
+      margin: 0 0 6% 0;
+      .first-row {
+        display: flex;
+        .title-date {
+          flex: 2;
+          display: flex;
+          flex-direction: column;
+          span:first-child {
+            font-size: 1.8vw;
+            font-weight: 500;
+            line-height: 1;
+          }
+          .date-attach {
+            display: flex;
+            align-items: center;
+            span {
+              color: #848286;
+              font-size: 0.92vw;
+              margin-right: 1rem;
+            }
+            div {
+              color: #848286;
+              font-size: 0.92vw;
+              cursor: pointer;
+            }
+          }
+        }
+        .upd-del {
+          flex: 1;
+          display: flex;
+          justify-content: flex-end;
+          i {
+            font-size: 1.4vw;
+            cursor: pointer;
+          }
+        }
+      }
+      .comm-row {
+        display: flex;
+        justify-content: space-between;
+        .comm-item {
+          width: 40%;
+          display: flex;
+          flex-direction: column;
+          span:first-child {
+            color: #848286;
+            font-size: 0.92vw;
+          }
+          span:last-child {
+            font-size: 1.2vw;
+            color: #000;
+          }
+        }
+        .category {
+          span:last-child {
+            color: #ff9900;
+          }
+        }
+        .amount {
+          span:last-child {
+            color: #5bc5a7;
+            font-weight: 500;
+          }
+        }
+      }
+      .s3-attach {
+        display: flex;
+        flex-direction: column;
+        a {
+          width: fit-content;
+        }
+      }
+    }
+  }
+}
+.no-expense-msg {
+  font-size: 1.5vw;
+  height: 100%;
+  background: #fff;
+  color: black; //#4d8ee4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  div:first-child {
+    margin-bottom: 1rem;
+    font-size: 2vw;
+  }
+  div span {
+    text-transform: capitalize;
+    color: #4d8ee4;
+  }
+}

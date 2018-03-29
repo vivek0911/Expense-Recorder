@@ -13,3 +13,5 @@ exports.deletedExpense = payload => ({ type: 'DELETED_EXPENSE', payload });
 exports.convertCurrencyOfExpense = payload => ({ type: 'CONVERT_CUREENCY_EXPENSE', payload });
 exports.filterTrips = payload => ({ type: 'FILTER_TRIP', payload });
 
+// trip-expenses
+exports.gotExpensesByTripId = payload => ({ type: 'GOT_ALL_EXPENSES_OF_TRIP', payload });

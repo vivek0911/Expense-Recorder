@@ -8,11 +8,11 @@
     { "value": "MISC", "label": "MISC" }
   ],
   "tripType": [
-    { "value": "A", "label": "A" },
-    { "value": "B", "label": "B" },
-    { "value": "C", "label": "C" },
-    { "value": "D", "label": "D" },
-    { "value": "E", "label": "E" }
+    { "value": "Honeymoon", "label": "Honeymoon" },
+    { "value": "Culture", "label": "Culture" },
+    { "value": "Trekking", "label": "Trekking" },
+    { "value": "Beach", "label": "Beach" },
+    { "value": "Business", "label": "Business" }
   ],
   "currency": [
     { "value": "AED", "label": "AED" },

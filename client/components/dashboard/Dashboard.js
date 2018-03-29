@@ -20,7 +20,7 @@ class Dashboard extends Component {
     return (
       <div className="dash-wrap">
         <Header />
-        <div className="trip-expe-contain mt-4">
+        <div className="trip-expe-contain mt-4" style={{ paddingTop: '55px' }}>
           <Route exact path={match.url} component={ShowTrips} />
           <Route exact path={`${match.url}/addtrip`} component={AddTrip} />
           <Route
