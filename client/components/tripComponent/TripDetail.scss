@@ -17,13 +17,14 @@
             font-weight: 500;
           }
           .expe-curr {
+            display: flex;
+            align-items: center;
+            color: #D4121C;
             .amt {
               font-size: 2vw;
-              color: #D4121C;
             }
             .curr {
               font-size: 1.2vw;
-              color: #D4121C;
               cursor: pointer;
               // animation: color-change 3s infinite;
               // @keyframes color-change {

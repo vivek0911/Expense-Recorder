@@ -21,7 +21,10 @@ export default (state = initialState.trip, action) => {
       const filteredData = _.isEmpty(action.payload.text) ? state.tripsData : state.tripsData.filter(x => _.includes(_.toLower(x.title), _.toLower(action.payload.text)));
       return _.assign({}, state, { allTrips: filteredData });
     case 'GOT_ALL_EXPENSES_OF_TRIP':
-      return _.assign({}, state, { tripExpenses: action.payload });
+      return _.assign({}, state, { tripExpenses: action.payload, filteredExpenses: action.payload });
+    case 'FILTER_EXPENSE':
+      const filteredExpe = _.isEmpty(action.payload.text) ? state.tripExpenses : state.tripExpenses.filter(x => _.includes(_.toLower(x.title), _.toLower(action.payload.text)));
+      return _.assign({}, state, { filteredExpenses: filteredExpe });
 
     case 'CONVERT_CUREENCY_EXPENSE':
       const obj = action.payload;

@@ -4,7 +4,7 @@ import Moment from 'moment';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Button, FieldSelect } from '../uiKit/UIKit';
+import { Button, FieldSelectCurrency } from '../uiKit/UIKit';
 import Data from '../../constants/Data.json';
 import './TripDetail.scss';
 
@@ -53,7 +53,7 @@ class TripDetail extends Component {
               <span className="expe-curr">
                 <span className="amt">{totalExpense}&nbsp;</span>
                 { x ? <span className="curr" onClick={() => this.setState({ x: !x })}>{currency}</span> :
-                <FieldSelect value={currency} onChange={v => this.onChange(v, 'currency')} options={Data.currency} />
+                <FieldSelectCurrency value={currency} onChange={v => this.onChange(v, 'currency')} options={Data.currency} selectStyle={{ color: '#D4121C' }} />
                 }
               </span>
             </div>

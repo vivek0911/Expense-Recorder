@@ -11,7 +11,10 @@ exports.addedExpense = payload => ({ type: 'NEW_EXPENSE_ADDED', payload });
 exports.updatedExpense = payload => ({ type: 'UPDATED_EXPENSE', payload });
 exports.deletedExpense = payload => ({ type: 'DELETED_EXPENSE', payload });
 exports.convertCurrencyOfExpense = payload => ({ type: 'CONVERT_CUREENCY_EXPENSE', payload });
+
+//filter
 exports.filterTrips = payload => ({ type: 'FILTER_TRIP', payload });
+exports.filterExpenses = payload => ({ type: 'FILTER_EXPENSE', payload });
 
 // trip-expenses
 exports.gotExpensesByTripId = payload => ({ type: 'GOT_ALL_EXPENSES_OF_TRIP', payload });

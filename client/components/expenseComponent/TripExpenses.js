@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
 import asyncActions from '../../actions/asyncActions';
 import syncActions from '../../actions/syncActions';
-import { FieldSelect } from '../uiKit/UIKit';
+import { FieldSelectCurrency } from '../uiKit/UIKit';
 import Data from '../../constants/Data.json';
 import './TripExpenses.scss';
 
@@ -19,6 +19,9 @@ class TripExpenses extends Component {
   }
   componentDidMount() {
     this.props.dispatch(asyncActions.getExpensesByTripId(this.props.trip._id));
+  }
+  onSearch(text) {
+    this.props.dispatch(syncActions.filterExpenses({ text }));
   }
   onDelete(exp) {
     const x = window.confirm('Are you sure you want to delete?');
@@ -46,8 +49,14 @@ class TripExpenses extends Component {
           <div>Let's get started by <Link to={{ pathname: `/trip/${trip._id}/addExpense`, state: { trip } }}>adding expenses</Link> to <span>{trip.title}</span></div>
         </div>
       :
-        <div className="trip-expenses-wrap p-2">
-          <h5 className="mb-3">Find All Expenses of <span>{trip.title}</span> Here</h5>
+        <div className="trip-expenses-wrap px-2 pb-2">
+          <div className="top-title-search mb-3">
+            <h5>Find All Expenses of <span>{trip.title}</span> Here</h5>
+            <input
+              type="search" placeholder="Search Expense by Title" className="mb-2"
+              onChange={e => this.onSearch(e.target.value)}
+            />
+          </div>
           <div className="expe-cards-wrap">
             {
               (tripExpe || []).map((expe, key) => (
@@ -85,7 +94,7 @@ class TripExpenses extends Component {
                       <span>Amount</span>
                       <span>
                         <text>{expe.amount}&nbsp;</text>
-                        {x === expe._id ? <FieldSelect value={expe.baseCurrency} onChange={v => this.onChange(v, expe)} options={Data.currency} style={{ width: '50%' }} /> : <text onClick={() => this.setState({ x: expe._id })} style={{ cursor: 'pointer' }}>{expe.baseCurrency}</text>}
+                        {x === expe._id ? <FieldSelectCurrency value={expe.baseCurrency} onChange={v => this.onChange(v, expe)} options={Data.currency} style={{ display: 'inline' }} /> : <text onClick={() => this.setState({ x: expe._id })} style={{ cursor: 'pointer' }}>{expe.baseCurrency}</text>}
                       </span>
                     </div>
                     <div className="add-note comm-item">
@@ -121,5 +130,5 @@ TripExpenses.propTypes = {
   history: PropTypes.object,
 };
 
-const select = state => ({ tripExpe: state.tripReducer.tripExpenses, rates: state.ratesReducer.rates });
+const select = state => ({ tripExpe: state.tripReducer.filteredExpenses, rates: state.ratesReducer.rates });
 export default withRouter(connect(select)(TripExpenses));

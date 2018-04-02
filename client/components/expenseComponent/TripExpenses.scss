@@ -1,5 +1,19 @@
 .trip-expenses-wrap {
-  h5 span { text-transform: capitalize; }
+  .top-title-search {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    h5 span { text-transform: capitalize; }
+    input {
+      border: 1px solid #D8E1E8;
+      border-radius: 10px;
+      outline: none;
+      padding: 5px 10px;
+      &:focus, &:active {
+        border: 1px solid #4d8ee4;
+      }
+    }
+  }
   .expe-cards-wrap {
     display: flex;
     flex-wrap: wrap;
